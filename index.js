@@ -1,3 +1,6 @@
+const teamCollection = document.querySelector("#team-collection")
+
+
 document.addEventListener("DOMContentLoaded", () => {
     fetchTeams()
 })
@@ -7,5 +10,8 @@ function fetchTeams() {
     .then(resp => resp.json())
     .then(teams => {
         console.log(teams)
+        teamCollection.innerHTML = renderTeams(teams)
     })
 }
+
+
