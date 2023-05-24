@@ -1,8 +1,10 @@
 const teamCollection = document.querySelector("#team-collection")
+const teamDropdown = document.querySelector("#team-dropdown-form")
 
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchTeams()
+    teamDropdown.addEventListener("change", handleChange)
 })
 
 function fetchTeams() {
@@ -27,9 +29,14 @@ function renderTeam(team){
             <h1>${team.full_name}</h1>
             <h2>${team.abbreviation}</h2>
             <h2>${team.titles}</h2>
-            <button class="delete-button">Like </button>
+            <button class="like-button">Like &#128077</button>
         </div>
 
     </div>
     `
+}
+
+//Function for filtering by team name
+function handleChange(e) {
+    const teamName = e.target.value
 }
