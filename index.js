@@ -29,8 +29,9 @@ function renderTeam(team){
         <div class="team-card-frame">
             <img src="${team.logo}" class="team-logo" />
             <h1>${team.full_name}</h1>
-            <h2>${team.abbreviation}</h2>
-            <h2>${team.titles}</h2>
+            <p>Abbreviation: ${team.abbreviation}</p>
+            <h2># of NBA Titles: ${team.titles}</h2>
+            <p> ${team.likes} Likes </p>
             <button class="like-button">Like &#128077</button>
         </div>
 
@@ -55,3 +56,5 @@ function handleChange(e) {
         }
     }
 }
+
+//Function for adding a like to a team.
