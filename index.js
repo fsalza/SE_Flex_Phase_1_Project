@@ -1,5 +1,6 @@
 const teamCollection = document.querySelector("#team-collection")
 const teamDropdown = document.querySelector("#team-dropdown-form")
+const likeButton = document.getElementsByClassName("like-button")
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchTeams()
@@ -39,6 +40,7 @@ function renderTeam(team){
 
 // //Function for filtering by team name using the "change" event listener:
 function handleChange(e) {
+    e.preventDefault()
     const teamName = e.target.value.toLowerCase(); // Convert the team name to lowercase for case-insensitive comparison
     const teamCards = document.getElementsByClassName("team-card"); // Get all team cards
     
