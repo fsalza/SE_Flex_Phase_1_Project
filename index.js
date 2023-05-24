@@ -5,6 +5,7 @@ const likeButton = document.getElementsByClassName("like-button")
 document.addEventListener("DOMContentLoaded", () => {
     fetchTeams()
     teamDropdown.addEventListener("change", handleChange)//Event listener for filtering by team name
+    teamCollection.addEventListener("click", addLikes)
 })
 
 //Fetch to collect data from the db.json file and append it to the dom in the form of a card for each team:
@@ -58,3 +59,22 @@ function handleChange(e) {
 }
 
 //Function for adding a like to a team.
+function addLikes(e) {
+    if (e.target.className === "like-button"){
+        let currentLikes = parseInt(e.target.previousElementSibling.innerText)
+        let updatedLikes = currentLikes + 1
+        e.target.previousElementSibling.innerText = updatedLikes + " Likes"
+
+        //Updating the db.json file to reflect the increase in likes
+        fetch(`http://localhost:3001/teams"/${e.target.dataset.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: JSON.stringify({
+                likes: updatedLikes
+              })
+        })
+    }
+}
