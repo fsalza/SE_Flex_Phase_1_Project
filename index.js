@@ -66,8 +66,8 @@ function addLikes(e) {
         let updatedLikes = currentLikes + 1
         e.target.previousElementSibling.innerText = updatedLikes + " Likes"
 
-        //Updating the db.json file to reflect the increase in likes
-        fetch(`http://localhost:3001/teams/${e.target.dataset.id}`, {
+        //Updating the db.json server to reflect the increase in likes
+        fetch(`http://localhost:3001/teams/${e.target.id.value}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
