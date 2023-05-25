@@ -29,9 +29,9 @@ function renderTeam(team){
     <div class="team-card" id="${team.id}">
         <div class="team-card-frame">
             <img src="${team.logo}" class="team-logo" />
-            <h1>${team.full_name}</h1>
+            <h2>${team.full_name}</h2>
             <p>Abbreviation: ${team.abbreviation}</p>
-            <h2># of NBA Titles: ${team.titles}</h2>
+            <h3># of NBA Titles: ${team.titles}</h3>
             <p> ${team.likes} Likes </p>
             <button class="like-button">Like &#128077</button>
         </div>
@@ -60,13 +60,14 @@ function handleChange(e) {
 
 //Function for adding a like to a team.
 function addLikes(e) {
+    e.preventDefault()
     if (e.target.className === "like-button"){
         let currentLikes = parseInt(e.target.previousElementSibling.innerText)
         let updatedLikes = currentLikes + 1
         e.target.previousElementSibling.innerText = updatedLikes + " Likes"
 
         //Updating the db.json file to reflect the increase in likes
-        fetch(`http://localhost:3001/teams"/${e.target.dataset.id}`, {
+        fetch(`http://localhost:3001/teams/${e.target.dataset.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
