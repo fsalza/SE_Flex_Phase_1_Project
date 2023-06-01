@@ -5,7 +5,7 @@ const likeButton = document.getElementsByClassName("like-button")
 document.addEventListener("DOMContentLoaded", () => {
     fetchTeams()
     teamDropdown.addEventListener("change", handleChange)//Event listener for filtering by team name
-    teamCollection.addEventListener("click", addLikes)
+    teamCollection.addEventListener("click", addLikes)//Event listener for adding likes to teams
 })
 
 //Fetch to collect data from the db.json file and append it to the dom in the form of a card for each team:
@@ -42,13 +42,12 @@ function renderTeam(team){
 
 // //Function for filtering by team name using the "change" event listener:
 function handleChange(e) {
-    e.preventDefault()
     const teamName = e.target.value.toLowerCase(); // Convert the team name to lowercase for case-insensitive comparison
     const teamCards = document.getElementsByClassName("team-card"); // Get all team cards
     
     for (let i = 0; i < teamCards.length; i++) {
         const card = teamCards[i];
-        const cardTitle = card.getElementsByTagName("h1")[0].textContent.toLowerCase(); // Get the team name from the card and convert it to lowercase
+        const cardTitle = card.getElementsByTagName("h2")[0].textContent.toLowerCase(); // Get the team name from the card and convert it to lowercase
         
         if (cardTitle.includes(teamName)) {
             card.style.display = "block"; // Show the card if the team name matches the filter
@@ -65,9 +64,9 @@ function addLikes(e) {
         let currentLikes = parseInt(e.target.previousElementSibling.innerText)
         let updatedLikes = currentLikes + 1
         e.target.previousElementSibling.innerText = updatedLikes + " Likes"
-
+            console.log(e.target.parentElement.parentElement.id)
         //Updating the db.json server to reflect the increase in likes
-        fetch(`http://localhost:3001/teams/${e.target.id.value}`, {
+        fetch(`http://localhost:3001/teams/${e.target.parentElement.parentElement.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
